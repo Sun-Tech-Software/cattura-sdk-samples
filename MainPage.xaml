@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cattura.SDK.Test.MainPage"
+             Title="Cattura SDK Test">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="8" Padding="20,24">
+
+            <Label
+                Text="Cattura SDK Tester (MAUI)"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="{StaticResource Primary}" />
+
+            <Label
+                Text="Test the Cattura SDK from C# MAUI. Tap a button to start a scan."
+                FontSize="12"
+                TextColor="DarkGray"
+                Margin="0,0,0,4" />
+
+            <!-- Device ID -->
+            <Frame BackgroundColor="#1A1A2E" Padding="10,8" BorderColor="#333355" HasShadow="False" CornerRadius="6" Margin="0,0,0,4">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Device ID (for license activation)"
+                           FontSize="11" FontAttributes="Bold"
+                           TextColor="#00DC50" />
+                    <Label x:Name="DeviceIdLabel"
+                           Text="loading…"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+                </VerticalStackLayout>
+            </Frame>
+            <Button Text="Show Device Info"
+                    Clicked="OnShowDeviceIdClicked"
+                    Margin="0,0,0,8" />
+
+            <!-- Barcode -->
+            <Label Text="Barcode" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Primary}" Margin="0,8,0,2" />
+            <Button Text="Barcode — Automatic" Clicked="OnBarcodeAutoClicked" />
+            <Button Text="Barcode — Accumulate" Clicked="OnBarcodeAccumulateClicked" />
+            <Button Text="Barcode — Manual" Clicked="OnBarcodeManualClicked" />
+
+            <!-- OCR -->
+            <Label Text="OCR" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Primary}" Margin="0,12,0,2" />
+
+            <!-- Minimum OCR confidence threshold (also applies to "Both" mode) -->
+            <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,2">
+                <Label Grid.Column="0"
+                       x:Name="OcrConfLabel"
+                       Text="OCR confidence threshold: 0%"
+                       FontSize="12"
+                       VerticalOptions="Center"
+                       TextColor="DarkGray" />
+                <Label Grid.Column="1"
+                       Text="(0 = no filter)"
+                       FontSize="10"
+                       VerticalOptions="Center"
+                       TextColor="Gray" />
+            </Grid>
+            <Slider x:Name="OcrConfSlider"
+                    Minimum="0"
+                    Maximum="100"
+                    Value="0"
+                    ValueChanged="OnOcrConfidenceChanged"
+                    Margin="0,0,0,6" />
+
+            <!-- Overlay label sizes: separate sliders for barcode (green boxes)
+                 and OCR (blue boxes). Range 10-40 sp. -->
+            <Label Text="Overlay label sizes" FontSize="12" FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}" Margin="0,12,0,2" />
+            <Label x:Name="BarcodeSizeLabel"
+                   Text="Barcode label: 18 sp"
+                   FontSize="12" TextColor="DarkGray" />
+            <Slider x:Name="BarcodeSizeSlider"
+                    Minimum="10" Maximum="40" Value="18"
+                    ValueChanged="OnBarcodeSizeChanged"
+                    Margin="0,0,0,4" />
+            <Label x:Name="OcrSizeLabel"
+                   Text="OCR label: 18 sp"
+                   FontSize="12" TextColor="DarkGray" />
+            <Slider x:Name="OcrSizeSlider"
+                    Minimum="10" Maximum="40" Value="18"
+                    ValueChanged="OnOcrSizeChanged"
+                    Margin="0,0,0,8" />
+
+            <Button Text="OCR — Automatic" Clicked="OnOcrAutoClicked" />
+            <Button Text="OCR — Accumulate" Clicked="OnOcrAccumulateClicked" />
+            <Button Text="OCR — Manual" Clicked="OnOcrManualClicked" />
+
+            <!-- Both -->
+            <Label Text="Barcode + OCR" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Primary}" Margin="0,12,0,2" />
+            <Button Text="Both — Automatic" Clicked="OnBothAutoClicked" />
+            <Button Text="Both — Accumulate" Clicked="OnBothAccumulateClicked" />
+            <Button Text="Both — Manual" Clicked="OnBothManualClicked" />
+
+            <!-- Result -->
+            <Label Text="Last scan result:" FontSize="14" FontAttributes="Bold" Margin="0,16,0,6" />
+            <Frame BackgroundColor="#F5F5F5" Padding="12" BorderColor="LightGray" HasShadow="False" CornerRadius="6">
+                <Label x:Name="ResultLabel"
+                       Text="(no scan yet)"
+                       FontSize="13"
+                       TextColor="DarkGray" />
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

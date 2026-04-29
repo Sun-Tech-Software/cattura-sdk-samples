@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cattura.SDK.Test.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#007830</Color>
+            <Color x:Key="PrimaryDark">#00501F</Color>
+            <Color x:Key="Accent">#FFC800</Color>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
