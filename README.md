@@ -10,7 +10,7 @@ This project is the reference integration example for Suntech's Cattura SDK — 
 
 | | |
 |---|---|
-| Platform | Android 11+ (API 30) |
+| Platform | Android 13+ (API 33) — Zebra AI DataCapture SDK 4.1 requirement; the SDK 1.x line covers Android 11/12 |
 | Target device | Zebra With AI |
 | .NET | .NET 10 (MAUI) |
 | IDE | Visual Studio 2022 17.12+ or JetBrains Rider |
@@ -24,8 +24,8 @@ This project is the reference integration example for Suntech's Cattura SDK — 
 ### 1. Clone and open
 
 ```bash
-git clone https://github.com/suntech/Cattura.SDK.Test.git
-cd Cattura.SDK.Test
+git clone https://github.com/Sun-Tech-Software/cattura-sdk-samples.git
+cd cattura-sdk-samples
 ```
 
 Open `Cattura.SDK.Test.csproj` in Visual Studio or Rider.
@@ -36,11 +36,15 @@ Open `Cattura.SDK.Test.csproj` in Visual Studio or Rider.
 dotnet restore
 ```
 
-This pulls `Suntech.Cattura.SDK` and its two satellite model packages automatically:
-- `Suntech.Cattura.ZebraBarcode` (~108 MB) — barcode localizer model
-- `Suntech.Cattura.ZebraOcr` (~197 MB) — text OCR recognizer model
+This pulls `Suntech.Cattura.SDK` (~67 MB). The two Zebra AI models are **not** NuGet
+packages: the SDK package declares them as `AndroidMavenLibrary` items, so the **first
+build** downloads them from Zebra's public Maven repository and caches them per machine:
+- `com.zebra.ai.models.vision:barcode-decoder:5.0.4` (~154 MB)
+- `com.zebra.ai.models.vision:text-ocr-recognizer:2.9.0` (~281 MB)
 
-> First restore may take a few minutes due to the model sizes.
+> The first build needs network access to `zebratech.jfrog.io` and may take a few minutes.
+> Barcode-only apps can set `<CatturaBundleOcrModel>false</CatturaBundleOcrModel>` in the
+> `.csproj` to skip the OCR model; see the package README for offline builds.
 
 ### 3. Configure the license
 
@@ -127,6 +131,7 @@ The scanner opens a fullscreen overlay on the device camera. The user points the
 | `Automatic` | Returns the first recognized item immediately |
 | `Accumulate` | Lets the user collect multiple items; confirms with "SEND ALL" |
 | `Manual` | Freezes the frame and lets the user tap the item to send |
+| `SceneCount` | Counts the objects in the scene (barcodes only), copies with the same code included; "SEND ALL" returns one result per counted copy |
 
 ### OCR confidence filter
 
@@ -156,10 +161,10 @@ Each `CatturaResult` exposes:
 This app consumes the SDK via NuGet. The only reference needed in your `.csproj` is:
 
 ```xml
-<PackageReference Include="Suntech.Cattura.SDK" Version="1.0.3" />
+<PackageReference Include="Suntech.Cattura.SDK" Version="2.0.0" />
 ```
 
-NuGet automatically resolves the two satellite model packages as transitive dependencies.
+The Zebra AI models are downloaded at the first build from Zebra's Maven repository (see above).
 
 For more details on the full API, see the [Suntech.Cattura.SDK README](https://www.nuget.org/packages/Suntech.Cattura.SDK).
 

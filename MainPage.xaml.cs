@@ -69,6 +69,11 @@ public partial class MainPage : ContentPage
     private async void OnBarcodeManualClicked(object sender, EventArgs e) =>
         await Scan(ZebraRecognitionMode.Barcode, ZebraSelectionMode.Manual);
 
+    // Counts the objects in the scene (copies with the same code included):
+    // "SEND ALL" returns one CatturaResult per counted copy.
+    private async void OnBarcodeSceneCountClicked(object sender, EventArgs e) =>
+        await Scan(ZebraRecognitionMode.Barcode, ZebraSelectionMode.SceneCount);
+
     // ---------- OCR ----------
     private async void OnOcrAutoClicked(object sender, EventArgs e) =>
         await Scan(ZebraRecognitionMode.Ocr, ZebraSelectionMode.Automatic);
@@ -169,6 +174,6 @@ public partial class MainPage : ContentPage
 
     // Stub enums for shared code (used on non-Android only)
     private static class ZebraRecognitionMode { public const int Barcode = 0, Ocr = 1, Both = 2; }
-    private static class ZebraSelectionMode { public const int Automatic = 0, Accumulate = 1, Manual = 2; }
+    private static class ZebraSelectionMode { public const int Automatic = 0, Accumulate = 1, Manual = 2, SceneCount = 3; }
 #endif
 }
