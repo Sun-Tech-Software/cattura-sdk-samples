@@ -161,7 +161,7 @@ Each `CatturaResult` exposes:
 This app consumes the SDK via NuGet. The only reference needed in your `.csproj` is:
 
 ```xml
-<PackageReference Include="Suntech.Cattura.SDK" Version="2.0.0" />
+<PackageReference Include="Suntech.Cattura.SDK" Version="2.0.1" />
 ```
 
 The Zebra AI models are downloaded at the first build from Zebra's Maven repository (see above).
