@@ -36,11 +36,11 @@ Open `Cattura.SDK.Test.csproj` in Visual Studio or Rider.
 dotnet restore
 ```
 
-This pulls `Suntech.Cattura.SDK` (~67 MB). The two Zebra AI models are **not** NuGet
+This pulls `Suntech.Cattura.SDK` (~69 MB). The two Zebra AI models are **not** NuGet
 packages: the SDK package declares them as `AndroidMavenLibrary` items, so the **first
 build** downloads them from Zebra's public Maven repository and caches them per machine:
-- `com.zebra.ai.models.vision:barcode-decoder:5.0.4` (~154 MB)
-- `com.zebra.ai.models.vision:text-ocr-recognizer:2.9.0` (~281 MB)
+- `com.zebra.ai.models.vision:barcode-decoder:5.0.6` (~153 MB)
+- `com.zebra.ai.models.vision:text-ocr-recognizer:2.10.2` (~422 MB)
 
 > The first build needs network access to `zebratech.jfrog.io` and may take a few minutes.
 > Barcode-only apps can set `<CatturaBundleOcrModel>false</CatturaBundleOcrModel>` in the
@@ -161,7 +161,7 @@ Each `CatturaResult` exposes:
 This app consumes the SDK via NuGet. The only reference needed in your `.csproj` is:
 
 ```xml
-<PackageReference Include="Suntech.Cattura.SDK" Version="2.0.1" />
+<PackageReference Include="Suntech.Cattura.SDK" Version="2.0.2" />
 ```
 
 The Zebra AI models are downloaded at the first build from Zebra's Maven repository (see above).
